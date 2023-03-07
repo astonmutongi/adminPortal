@@ -1,0 +1,53 @@
+<mat-progress-spinner *ngIf="loading" mode="indeterminate" color="accent"></mat-progress-spinner>
+
+<div class="main-content" *ngIf="!loading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Update A File</h4>
+                        <p class="card-category">Complete video information</p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup] = "listingForm" (ngSubmit)="onSubmit()">
+                           
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Title" type="text" formControlName="title">
+                                    </mat-form-field>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Price" type="text" formControlName="price">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Points" type="text" formControlName="points">
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                          
+                            <div class="row">
+                                <div class="col-md-12">
+                                  <label>Description</label>
+                                  <mat-form-field class="example-full-width">
+                                     <textarea matInput placeholder="" formControlName="description"></textarea>
+                                   </mat-form-field>                                  
+                                </div>
+                            </div>
+                            <button mat-raised-button type="button" name="submit"  (click)="onDelete()"  class="btn btn-danger pull-right" >Delete File</button>
+                            <button mat-raised-button  type="submit" class="btn btn-danger pull-right" >Save File</button>                           
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </div>
+</div>

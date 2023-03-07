@@ -1,0 +1,153 @@
+<mat-progress-spinner *ngIf="loading" mode="indeterminate" color="accent"></mat-progress-spinner>
+
+<div class="main-content" *ngIf="!loading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Upload A File</h4>
+                        <p class="card-category">Complete video information</p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup] = "listingForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Upload Video
+                                    <input type="file" id="video" name="video" multiple (change)="uploadFile($event)"/>        
+                                </div> 
+                                <div class="col-md-6">
+                                    Upload Cover Image
+                                    <input type="file" id="cover" name="cover" multiple (change)="uploadCover($event)"/>        
+                                </div>   
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Title" type="text" formControlName="title">
+                                    </mat-form-field>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Price" type="text" formControlName="price">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Points" type="text" formControlName="points">
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                          
+                            <div class="row">
+                                <div class="col-md-12">
+                                  <label>Description</label>
+                                  <mat-form-field class="example-full-width">
+                                     <textarea matInput placeholder="" formControlName="description"></textarea>
+                                   </mat-form-field>                                  
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" >Save File</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div>
+                    <h3 class="card-title">Saved Files</h3>
+                </div>
+               
+            </div>
+        </div>
+        <div class="card-columns">
+            <div class="card" *ngFor="let post of DataResponse">
+              <img class="card-img-top" height="300vh" [src]="createImgPath(post.coverImage)" [alt]="post.title" />
+              <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">
+                  Uploaded on
+                  {{ post.date | date: "medium" }}
+                </p>
+                <p class="card-text">{{ post.description }}  <a  routerLink='../editfile' [state]="{ listingId:post.listingId}"  class="btn btn-danger pull-right" >Edit File</a>  </p>        
+              </div>
+            </div>
+          </div>
+          
+       <!-- <div class="row">
+            <div class="col-md-3">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="javascript:void(0)">
+                            <img class="img" src="./assets/img/faces/marc.jpg" />
+                        </a>
+                    </div>
+                    <div class="card-body">                      
+                        <h4 class="card-title">Sexy Lil Bathtime</h4>
+                        <p class="card-description">
+                            Life has been super stressful lately! To wind down I drew up the most beautiful bath with flowers & bubbles! I was having a nice relaxing soak and I couldn’t help but relieve myself some more! After a couple orgasms I’m feeling good as new!
+                        </p>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-round">Edit</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="javascript:void(0)">
+                            <img class="img" src="./assets/img/faces/marc.jpg" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                       <h4 class="card-title">At the Park</h4>
+                        <p class="card-description">
+                            Life has been super stressful lately! To wind down I drew up the most beautiful bath with flowers & bubbles! I was having a nice relaxing soak and I couldn’t help but relieve myself some more! After a couple orgasms I’m feeling good as new!
+                        </p>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-round">Edit</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="javascript:void(0)">
+                            <img class="img" src="./assets/img/faces/marc.jpg" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category text-gray">CEO / Co-Founder</h6>
+                        <h4 class="card-title">test Title</h4>
+                        <p class="card-description">
+                            Life has been super stressful lately! To wind down I drew up the most beautiful bath with flowers & bubbles! I was having a nice relaxing soak and I couldn’t help but relieve myself some more! After a couple orgasms I’m feeling good as new!
+                        </p>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-round">Edit</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="javascript:void(0)">
+                            <img class="img" src="./assets/img/faces/marc.jpg" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category text-gray">CEO / Co-Founder</h6>
+                        <h4 class="card-title">two guys</h4>
+                        <p class="card-description">
+                            Life has been super stressful lately! To wind down I drew up the most beautiful bath with flowers & bubbles! I was having a nice relaxing soak and I couldn’t help but relieve myself some more! After a couple orgasms I’m feeling good as new!
+                        </p>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-round">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div>
+  </div>
+  
